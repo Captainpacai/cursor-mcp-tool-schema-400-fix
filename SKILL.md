@@ -247,12 +247,12 @@ python cursor_mcp_toolctl.py apply \
 [i] 从报错解析: server=cursor-app-control tool=move_agent_to_root
 [0] Cursor 进程数: 0
 [1] 写入前 mcpDisabledTools = []
-[2] 已备份 3 个文件 -> ...\state.vscdb.bak_20261003_172730
+[2] 已备份 3 个文件 -> ...\state.vscdb.bak_<时间戳>
 [3] 已写入: ["cursor-app-control|move_agent_to_root"]
 [4] 回读验证: 一致 OK
 
 下一步：启动 Cursor -> 切到出错的模型 -> 新开一个 chat -> 发送任意消息验证。
-回退  ：python cursor_mcp_toolctl.py restore --backup ...\state.vscdb.bak_20261003_172730
+回退  ：python cursor_mcp_toolctl.py restore --backup ...\state.vscdb.bak_<时间戳>
 ```
 
 **预期后续**：若用户回报"仍报，但变成 `cursor-app-control-cursor_dialog`"，执行同一条命令、换新的报错原文再跑一次即可（合并式写入，不清空已有项）。
@@ -263,12 +263,12 @@ python cursor_mcp_toolctl.py apply \
 
 **执行**
 ```bash
-python cursor_mcp_toolctl.py scan --cursor-dir "C:/AItools/Cursor-3.11/cursor/resources/app/out"
+python cursor_mcp_toolctl.py scan --cursor-dir "<CURSOR_INSTALL>/resources/app/out"
 ```
 
-**输出（实测，已脱敏路径无关部分）**
+**输出（实测）**
 ```
-[scan] out dir  : C:/AItools/Cursor-3.11/cursor/resources/app/out
+[scan] out dir  : <CURSOR_INSTALL>/resources/app/out
 [scan] server id: cursor-app-control
   - workbench.glass.main.js: 工具常量=9, 风险schema=22, 工具=9
   - workbench.desktop.main.js: 工具常量=9, 风险schema=14, 工具=9
@@ -365,7 +365,7 @@ for(const a of s) this.mcpService.isToolDisabled(r, a.name) || o.push(a.name);
 | Bash 工具 PATH 损坏 | `ls`/`cat`/`head` 报 command not found | 用绝对路径调 Python，不用 shell 内建命令 |
 | PowerShell stdout 被吞 | 只回 exit code | 脚本统一把结果写文件，再读文件 |
 | GBK 控制台 | 中文 print 抛异常 | 脚本已做 ASCII 转义输出 |
-| 无系统 Python | `python` 不可用 | 用托管解释器绝对路径，如 `C:\Users\<user>\.workbuddy\binaries\python\versions\3.13.12\python.exe` |
+| 无系统 Python | `python` 不可用 | 用你环境中的 Python 3 解释器绝对路径（Windows 常见为 Microsoft Store 的 `python` 占位符，需从 python.org 安装真实解释器） |
 
 ---
 
