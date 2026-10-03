@@ -1,0 +1,9 @@
+# 脚本运行时产物
+.cursor_toolctl_out.txt
+
+# Python
+__pycache__/
+*.py[cod]
+
+# 本地状态数据库备份（勿提交）
+state.vscdb*
